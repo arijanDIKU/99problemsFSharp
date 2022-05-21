@@ -48,10 +48,13 @@ let rec flatten = function
 let rec compress = function
                    | [] -> []
                    | [x] -> [x]
-                   | [x;y] -> if x=y then [x] else [x;y]
                    | x::y::zs -> if x=y then compress (y::zs) else x::compress (y::zs)
+
 
 
 //Problem 9: put consecutive duplicates into seperate sublists
 let rec pack = function
+           | [] -> []
+           | [x] -> [x] 
+           | x::y::zs -> if x=y then [x]@(pack (y::zs)) else [x]::(pack (y::zs))
 
