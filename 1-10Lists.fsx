@@ -49,12 +49,13 @@ let rec compress = function
                    | [] -> []
                    | [x] -> [x]
                    | x::y::zs -> if x=y then compress (y::zs) else x::compress (y::zs)
-
-
+compress [1;1] |> printfn "%A" 
 
 //Problem 9: put consecutive duplicates into seperate sublists
+//Doesn't work ...
 let rec pack = function
-           | [] -> []
-           | [x] -> [x] 
-           | x::y::zs -> if x=y then [x]@(pack (y::zs)) else [x]::(pack (y::zs))
+               | [] -> []
+               | xs::ys::zs -> if xs=ys then xs@(pack (ys::zs)) else [xs]::(pack (ys::zs))
+
+
 
