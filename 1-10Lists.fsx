@@ -58,4 +58,14 @@ let rec pack = function
                | xs::ys::zs -> if xs=ys then xs@(pack (ys::zs)) else [xs]::(pack (ys::zs))
 
 
+//Problem 10: Implementing so-called run-length encoding data compression method. 
+//            Consecutive duplicate elements are encoded as lists (N E) where is number of elements of E
+let encode ls = 
+   let lsPacked = pack ls    
+   let rec encode' = function   
+                     | [] -> []
+                     | x::xs -> (length x, x.[0])::(encode' xs)
+   encode' lsPacked
+
+
 
