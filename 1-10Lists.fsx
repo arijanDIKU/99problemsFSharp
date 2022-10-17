@@ -18,7 +18,7 @@ let rec las' = function
 
 //Problem 3: k'th element of list where the first element is number 1 
 let rec kth k = function
-            | [] -> failwith "empty list or index too high"
+            | [] || k<1 -> failwith "empty list or index out of bounds"
             | x::xs -> if k=1 then x else kth (k-1) xs 
 
 //Problem 4: number of elements 
@@ -52,10 +52,20 @@ let rec compress = function
 compress [1;1] |> printfn "%A" 
 
 //Problem 9: put consecutive duplicates into seperate sublists
-//Doesn't work ...
-let rec pack = function
-               | [] -> []
-               | xs::ys::zs -> if xs=ys then xs@(pack (ys::zs)) else [xs]::(pack (ys::zs))
+let pack xs =                                
+  let rec sublist = function                  
+   | [] -> []                                 
+   | x::y::zs when x = y -> x::sublist (y::zs)
+   | x::xs -> [x]                             
+  let rec skip = function                     
+   | [] -> []                                 
+   | x::y::zs when x<>y -> y::zs              
+   | x::xs -> skip xs                         
+  let rec pack' = function                    
+   | [] -> []                                 
+   | xs -> sublist xs :: (pack' (skip xs))    
+  pack' xs
+
 
 
 //Problem 10: Implementing so-called run-length encoding data compression method. 
