@@ -52,7 +52,7 @@ let rec compress = function
 compress [1;1] |> printfn "%A" 
 
 //Problem 9: put consecutive duplicates into seperate sublists
-let pack xs =                                
+let pack ls =                                
   let rec sublist = function                  
    | [] -> []                                 
    | x::y::zs when x = y -> x::sublist (y::zs)
@@ -64,7 +64,7 @@ let pack xs =
   let rec pack' = function                    
    | [] -> []                                 
    | xs -> sublist xs :: (pack' (skip xs))    
-  pack' xs
+  pack' ls
 
 
 
@@ -74,7 +74,7 @@ let encode ls =
    let lsPacked = pack ls    
    let rec encode' = function   
                      | [] -> []
-                     | x::xs -> (length x, x.[0])::(encode' xs)
+                     | x::xs -> (length x, last x)::(encode' xs)
    encode' lsPacked
 
 
