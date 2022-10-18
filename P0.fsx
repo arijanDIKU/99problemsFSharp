@@ -17,7 +17,7 @@ let rec las' = function
 
 //Problem 3: k'th element of list where the first element is number 1 
 let rec kth k = function
-            | [] || k<1 -> failwith "empty list or index out of bounds"
+            | [] -> failwith "empty list"
             | x::xs -> if k=1 then x else kth (k-1) xs 
 
 //Problem 4: number of elements 
@@ -48,7 +48,6 @@ let rec compress = function
                    | [] -> []
                    | [x] -> [x]
                    | x::y::zs -> if x=y then compress (y::zs) else x::compress (y::zs)
-compress [1;1] |> printfn "%A" 
 
 //Problem 9: put consecutive duplicates into seperate sublists
 let pack ls =                                
