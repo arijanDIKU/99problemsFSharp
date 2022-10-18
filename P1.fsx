@@ -66,7 +66,7 @@ let rotate ls n =
     let a,b = List.splitAt index ls in
                    b@a
 
-// Problem 20: Remove the kth element from a list
+// Problem 20: Remove the kth element from a list. Counting from 1.
 let removeAt ls = function 
     | out when out<=0 || out>length ls -> failwith "index error"
     | k -> List.removeAt (k-1) ls 
